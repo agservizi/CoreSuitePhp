@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreSuite - Installazione</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -30,7 +31,9 @@
                 <div class="col-md-8">
                     <div class="card mt-5">
                         <div class="card-body">
-                            <div class="setup-header">                                <h2><span class="text-primary font-weight-bold">Core</span><span class="font-weight-light">Suite</span></h2>
+                            <div class="setup-header">
+                                <img src="assets/images/logo.png" alt="CoreSuite Logo" style="max-width: 150px; margin-bottom: 1rem;">
+                                <h2><span class="text-primary font-weight-bold">Core</span><span class="font-weight-light">Suite</span></h2>
                                 <h3>Installazione</h3>
                             </div>
 

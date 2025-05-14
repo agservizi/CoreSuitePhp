@@ -155,7 +155,7 @@
                 });
             });
 
-            // Inizializzazione database
+            // Miglioramento della gestione degli errori e aggiunta di log dettagliati
             function initDatabase() {
                 const dbConfig = $('#dbConfigForm').serialize();
 
@@ -164,6 +164,7 @@
                 $('.progress-bar').css('width', '25%');
 
                 $.post('ajax/init_database.php', { action: 'init_database' }, function(response) {
+                    console.log('Risposta ricevuta da init_database.php:', response);
                     if (response.success) {
                         $('#installationLog').append('<p class="text-success">Database inizializzato con successo</p>');
                         $('.progress-bar').css('width', '100%');

@@ -158,26 +158,30 @@
             // Inizializzazione database
             function initDatabase() {
                 const dbConfig = $('#dbConfigForm').serialize();
-                
+
                 // Aggiorna UI per mostrare progresso
                 $('#installationLog').html('<p>Inizializzazione database in corso...</p>');
                 $('.progress-bar').css('width', '25%');
-                
+
                 $.post('ajax/init_database.php', { action: 'init_database' }, function(response) {
                     if (response.success) {
                         $('#installationLog').append('<p class="text-success">Database inizializzato con successo</p>');
                         $('.progress-bar').css('width', '100%');
-                        
+
                         // Attiva il pulsante per continuare
                         $('.next-step').prop('disabled', false);
-                        
+
                         // Procedi allo step successivo
                         setTimeout(function() {
                             showStep(currentStep + 1);
                         }, 1000);
                     } else {
                         $('#installationLog').append('<p class="text-danger">Errore: ' + response.message + '</p>');
+                        console.error('Errore durante l\'inizializzazione del database:', response.message);
                     }
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    $('#installationLog').append('<p class="text-danger">Errore AJAX: ' + textStatus + '</p>');
+                    console.error('Errore AJAX:', textStatus, errorThrown);
                 });
             }
 

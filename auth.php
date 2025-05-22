@@ -17,9 +17,20 @@ class Auth {
 
     public function login($email, $password, $remember = false) {
         try {
+            $email = trim($email);
+            $password = trim($password);
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Controllo hash valido
+            if ($user && (!isset($user['password']) || strlen($user['password']) < 50 || strpos($user['password'], '$2y$') !== 0)) {
+                return [
+                    'requiresMfa' => false,
+                    'success' => false,
+                    'message' => 'Hash password non valido. Reimposta la password.'
+                ];
+            }
 
             if ($user && password_verify($password, $user['password'])) {
                 if ($user['mfa_secret']) {
@@ -47,7 +58,7 @@ class Auth {
                 'message' => 'Credenziali non valide'
             ];
         } catch (Exception $e) {
-            error_log($e->getMessage());
+            error_log('Errore login: ' . $e->getMessage());
             return [
                 'requiresMfa' => false,
                 'success' => false,

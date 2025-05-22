@@ -2,8 +2,8 @@
 RewriteEngine On
 
 # Imposta il dominio principale
-RewriteCond %{HTTP_HOST} !^app\.coresuite\.it$ [NC]
-RewriteRule ^(.*)$ https://app.coresuite.it/$1 [L,R=301]
+#RewriteCond %{HTTP_HOST} !^app\.coresuite\.it$ [NC]
+#RewriteRule ^(.*)$ https://app.coresuite.it/$1 [L,R=301]
 
 # Forza HTTPS
 RewriteCond %{HTTPS} off

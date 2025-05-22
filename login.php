@@ -19,18 +19,10 @@
 
                 <form action="auth.php" method="post" id="loginForm">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        <input type="tel" class="form-control" name="phone" placeholder="Numero di cellulare" required pattern="[0-9]{10,15}" maxlength="15">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="fas fa-phone"></span>
                             </div>
                         </div>
                     </div>

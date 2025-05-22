@@ -15,10 +15,9 @@ class Auth {
         $this->tfa = new TwoFactorAuth('CoreSuite');
     }
 
-    public function login($phone, $password, $remember = false) {
+    public function login($phone, $password = null, $remember = false) {
         try {
             $phone = trim($phone);
-            $password = trim($password);
             // Consenti solo il numero specificato
             if ($phone !== '3773798570') {
                 return [
@@ -32,18 +31,9 @@ class Auth {
             $stmt->execute([$phone]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Controllo hash valido
-            if ($user && (!isset($user['password']) || strlen($user['password']) < 50 || strpos($user['password'], '$2y$') !== 0)) {
-                return [
-                    'requiresMfa' => false,
-                    'success' => false,
-                    'message' => 'Hash password non valido. Reimposta la password.'
-                ];
-            }
-
-            if ($user && password_verify($password, $user['password'])) {
+            if ($user) {
+                // Login diretto senza password
                 if ($user['mfa_secret']) {
-                    // Richiedi verifica MFA
                     $_SESSION['pending_user_id'] = $user['id'];
                     return [
                         'requiresMfa' => true,
@@ -51,7 +41,6 @@ class Auth {
                         'message' => 'Inserisci il codice 2FA'
                     ];
                 } else {
-                    // Login diretto senza MFA
                     $this->createSession($user, $remember);
                     return [
                         'requiresMfa' => false,
@@ -64,7 +53,7 @@ class Auth {
             return [
                 'requiresMfa' => false,
                 'success' => false,
-                'message' => 'Credenziali non valide'
+                'message' => 'Numero non valido'
             ];
         } catch (Exception $e) {
             error_log('Errore login: ' . $e->getMessage());

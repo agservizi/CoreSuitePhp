@@ -15,12 +15,21 @@ class Auth {
         $this->tfa = new TwoFactorAuth('CoreSuite');
     }
 
-    public function login($email, $password, $remember = false) {
+    public function login($phone, $password, $remember = false) {
         try {
-            $email = trim($email);
+            $phone = trim($phone);
             $password = trim($password);
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
-            $stmt->execute([$email]);
+            // Consenti solo il numero specificato
+            if ($phone !== '3773798570') {
+                return [
+                    'requiresMfa' => false,
+                    'success' => false,
+                    'message' => 'Accesso consentito solo con il numero 3773798570.'
+                ];
+            }
+            // Cerca l'utente tramite il campo phone (modifica se il campo si chiama diversamente)
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE phone = ?");
+            $stmt->execute([$phone]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // Controllo hash valido
@@ -289,9 +298,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     $auth = new Auth();
 
-    if (isset($_POST['email']) && isset($_POST['password'])) {
+    // Modifica: accetta solo il campo phone dal form
+    if (isset($_POST['phone']) && isset($_POST['password'])) {
         echo json_encode($auth->login(
-            $_POST['email'],
+            $_POST['phone'],
             $_POST['password'],
             isset($_POST['remember'])
         ));

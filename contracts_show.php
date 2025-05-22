@@ -8,4 +8,5 @@ require_once __DIR__ . '/src/controllers/ContractController.php';
 use CoreSuite\Controllers\ContractController;
 
 $controller = new ContractController();
-$controller->index();
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$controller->show($id);

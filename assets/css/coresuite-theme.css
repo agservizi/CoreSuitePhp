@@ -1,0 +1,60 @@
+/* Tema base CoreSuite: palette blu elettrico, verde energia, bianco */
+:root {
+  --coresuite-blue: #0066CC;
+  --coresuite-green: #00AA44;
+  --coresuite-white: #FFFFFF;
+  --coresuite-dark: #1a2332;
+}
+
+body {
+  background: var(--coresuite-white);
+  color: var(--coresuite-dark);
+}
+
+.navbar {
+  background: var(--coresuite-blue);
+  color: var(--coresuite-white);
+}
+
+.navbar .logo {
+  height: 36px;
+  margin-right: 16px;
+}
+
+.sidebar {
+  background: var(--coresuite-dark);
+  color: var(--coresuite-white);
+}
+
+.card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.btn-coresuite {
+  background: linear-gradient(135deg, var(--coresuite-blue), var(--coresuite-green));
+  color: var(--coresuite-white);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-coresuite:hover {
+  background: linear-gradient(135deg, var(--coresuite-green), var(--coresuite-blue));
+}
+
+/* Tema scuro */
+body.dark-mode {
+  background: var(--coresuite-dark);
+  color: var(--coresuite-white);
+}
+
+body.dark-mode .navbar {
+  background: #003366;
+}
+
+body.dark-mode .sidebar {
+  background: #222b3a;
+}

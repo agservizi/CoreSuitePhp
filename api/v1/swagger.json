@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CoreSuite API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://app.coresuite.it/api/v1" }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login e ottieni JWT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Token JWT" },
+          "401": { "description": "Credenziali non valide" }
+        }
+      }
+    },
+    "/contracts": {
+      "get": { "summary": "Lista contratti", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Nuovo contratto", "responses": { "200": { "description": "OK" } } }
+    },
+    "/contracts/{id}": {
+      "get": { "summary": "Dettaglio contratto", "responses": { "200": { "description": "OK" } } },
+      "put": { "summary": "Aggiorna contratto", "responses": { "200": { "description": "OK" } } },
+      "delete": { "summary": "Elimina contratto", "responses": { "200": { "description": "OK" } } }
+    },
+    "/customers": {
+      "get": { "summary": "Lista clienti", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Nuovo cliente", "responses": { "200": { "description": "OK" } } }
+    },
+    "/customers/{id}": {
+      "get": { "summary": "Dettaglio cliente", "responses": { "200": { "description": "OK" } } },
+      "put": { "summary": "Aggiorna cliente", "responses": { "200": { "description": "OK" } } },
+      "delete": { "summary": "Elimina cliente", "responses": { "200": { "description": "OK" } } }
+    },
+    "/upload": {
+      "post": { "summary": "Upload file allegato", "responses": { "200": { "description": "OK" } } }
+    },
+    "/stats": {
+      "get": { "summary": "Statistiche dashboard", "responses": { "200": { "description": "OK" } } }
+    }
+  }
+}

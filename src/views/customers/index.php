@@ -213,6 +213,18 @@ $(function() {
     let errorMsg = getUrlParam('error');
     if (successMsg) showToast('success', successMsg);
     if (errorMsg) showToast('error', errorMsg);
+
+    // Log per debug
+    try {
+        const customers = <?php echo json_encode($customers ?? null); ?>;
+        if (!customers || customers.length === 0) {
+            console.warn('DEBUG: Nessun cliente trovato o variabile $customers non valorizzata.', customers);
+        } else {
+            console.info('DEBUG: Clienti caricati:', customers);
+        }
+    } catch (e) {
+        console.error('DEBUG: Errore nel parsing dei clienti:', e);
+    }
 });
 </script>
 </body>

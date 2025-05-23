@@ -210,6 +210,18 @@ $(function() {
     let errorMsg = getUrlParam('error');
     if (successMsg) showToast('success', successMsg);
     if (errorMsg) showToast('error', errorMsg);
+
+    // Log per debug
+    try {
+        const providers = <?php echo json_encode($providers ?? null); ?>;
+        if (!providers || providers.length === 0) {
+            console.warn('DEBUG: Nessun provider trovato o variabile $providers non valorizzata.', providers);
+        } else {
+            console.info('DEBUG: Provider caricati:', providers);
+        }
+    } catch (e) {
+        console.error('DEBUG: Errore nel parsing dei provider:', e);
+    }
 });
 </script>
 </body>

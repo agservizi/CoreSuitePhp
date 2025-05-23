@@ -190,6 +190,18 @@ $(function() {
         $('#contractsTable tbody tr').show();
     });
 
+    // Log per debug
+    try {
+        const contracts = <?php echo json_encode($contracts ?? null); ?>;
+        if (!contracts || contracts.length === 0) {
+            console.warn('DEBUG: Nessun contratto trovato o variabile $contracts non valorizzata.', contracts);
+        } else {
+            console.info('DEBUG: Contratti caricati:', contracts);
+        }
+    } catch (e) {
+        console.error('DEBUG: Errore nel parsing dei contratti:', e);
+    }
+
     // Toast feedback da parametri GET
     function getUrlParam(name) {
         let results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);

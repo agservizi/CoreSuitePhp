@@ -13,9 +13,9 @@ class User
 
     public static function getDb()
     {
-        require_once __DIR__ . '/../../config/database.php';
-        $dsn = 'mysql:host=' . $GLOBALS['DB_HOST'] . ';dbname=' . $GLOBALS['DB_NAME'] . ';charset=utf8mb4';
-        return new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASS'], [
+        $config = include __DIR__ . '/../../config/database.php';
+        $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
+        return new \PDO($dsn, $config['db_user'], $config['db_pass'], [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
         ]);

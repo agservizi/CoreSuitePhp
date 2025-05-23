@@ -1,4 +1,4 @@
-/* Solo palette colori AdminLTE, senza variabili CoreSuite */
+/* AdminLTE 3 - Palette e override di default, senza personalizzazioni CoreSuite */
 :root {
   --primary: #3c8dbc;
   --secondary: #6c757d;
@@ -18,116 +18,114 @@
 }
 
 body {
-  background: var(--coresuite-white);
-  color: var(--coresuite-dark);
+  background: var(--light);
+  color: #212529;
 }
 
 /* Navbar AdminLTE override */
 .main-header.navbar {
-  background-color: var(--coresuite-blue) !important;
-  color: var(--coresuite-white) !important;
-  border-bottom: 2px solid var(--coresuite-green);
+  background-color: var(--primary) !important;
+  color: #fff !important;
 }
 .main-header .navbar-nav .nav-link,
 .main-header .navbar-brand {
-  color: var(--coresuite-white) !important;
+  color: #fff !important;
 }
 
 /* Sidebar AdminLTE override */
 .main-sidebar {
-  background-color: var(--coresuite-dark) !important;
+  background-color: var(--dark) !important;
 }
 .main-sidebar .brand-link {
-  background: var(--coresuite-dark) !important;
-  color: var(--coresuite-white) !important;
-  border-bottom: 1px solid var(--coresuite-blue);
+  background: var(--dark) !important;
+  color: #fff !important;
+  border-bottom: 1px solid var(--primary);
 }
 .main-sidebar .nav-sidebar > .nav-item > .nav-link.active {
-  background: linear-gradient(90deg, var(--coresuite-blue), var(--coresuite-green));
-  color: var(--coresuite-white) !important;
+  background: var(--primary);
+  color: #fff !important;
 }
 .main-sidebar .nav-sidebar > .nav-item > .nav-link {
-  color: var(--coresuite-white) !important;
+  color: #fff !important;
 }
 
 /* Card e box */
 .card {
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  border: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+  border: 1px solid #dee2e6;
 }
 .card-primary:not(.card-outline) > .card-header {
-  background: linear-gradient(90deg, var(--coresuite-blue), var(--coresuite-green));
-  color: var(--coresuite-white);
+  background: var(--primary);
+  color: #fff;
 }
 
 /* Bottoni personalizzati */
-.btn-coresuite, .btn-primary {
-  background: linear-gradient(135deg, var(--coresuite-blue), var(--coresuite-green));
-  color: var(--coresuite-white) !important;
+.btn-primary {
+  background: var(--primary);
+  color: #fff !important;
   border: none;
-  border-radius: 8px;
-  padding: 10px 24px;
+  border-radius: 0.25rem;
   font-weight: 600;
   transition: background 0.2s;
 }
-.btn-coresuite:hover, .btn-primary:hover {
-  background: linear-gradient(135deg, var(--coresuite-green), var(--coresuite-blue));
+.btn-primary:hover {
+  background: #367fa9;
 }
 
 /* Footer */
 .main-footer {
-  background: var(--coresuite-blue);
-  color: var(--coresuite-white);
-  border-top: 2px solid var(--coresuite-green);
+  background: var(--light);
+  color: #6c757d;
+  border-top: 1px solid #dee2e6;
 }
 
 /* Tema scuro */
 body.dark-mode {
-  background: var(--coresuite-dark);
-  color: var(--coresuite-white);
+  background: #222d32;
+  color: #fff;
 }
 body.dark-mode .main-header.navbar {
-  background: #003366 !important;
+  background: #222d32 !important;
 }
 body.dark-mode .main-sidebar {
-  background: #222b3a !important;
+  background: #1a2226 !important;
 }
 body.dark-mode .main-footer {
-  background: #003366 !important;
+  background: #222d32 !important;
 }
 
 /* Miglioramenti vari */
 ::-webkit-scrollbar-thumb {
-  background: var(--coresuite-blue);
+  background: var(--primary);
 }
 ::-webkit-scrollbar-track {
-  background: var(--coresuite-white);
+  background: var(--light);
 }
 
 /* Fix per input e form */
 input.form-control, select.form-control, textarea.form-control {
-  border-radius: 8px;
-  border: 1px solid #cfd8dc;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
 }
 input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
-  border-color: var(--coresuite-blue);
-  box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(60,141,188,0.1);
 }
 
 /* Toast e alert */
 .toast {
-  background: var(--coresuite-blue);
-  color: var(--coresuite-white);
-  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 0.25rem;
 }
 .alert-success {
-  background: var(--coresuite-green);
-  color: var(--coresuite-white);
+  background: var(--success);
+  color: #fff;
   border: none;
 }
 .alert-danger, .alert-error {
-  background: #e53935;
-  color: var(--coresuite-white);
+  background: var(--danger);
+  color: #fff;
   border: none;
 }

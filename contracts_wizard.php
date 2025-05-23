@@ -7,4 +7,4 @@ if (!isset($_SESSION['user_id'])) {
 }
 require_once __DIR__ . '/src/middleware/auth.php';
 require_any_role(['admin','user']);
-include __DIR__ . '/src/views/contracts/wizard.php';
+include __DIR__ . '/src/views/contracts/wizard_improved.php';

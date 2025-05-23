@@ -1,19 +1,20 @@
 /* AdminLTE 3 - Palette e override di default, senza personalizzazioni CoreSuite */
 :root {
-  --primary: #3c8dbc;
+  --primary: #007bff;
   --secondary: #6c757d;
-  --success: #00a65a;
+  --success: #28a745;
   --info: #17a2b8;
-  --warning: #f39c12;
-  --danger: #dd4b39;
-  --light: #f4f6f9;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
   --dark: #343a40;
-  --adminlte-blue: #3c8dbc;
-  --adminlte-green: #00a65a;
-  --adminlte-yellow: #f39c12;
-  --adminlte-red: #dd4b39;
+  --white: #ffffff;
+  --adminlte-blue: #007bff;
+  --adminlte-green: #28a745;
+  --adminlte-yellow: #ffc107;
+  --adminlte-red: #dc3545;
   --adminlte-gray: #6c757d;
-  --adminlte-light: #f4f6f9;
+  --adminlte-light: #f8f9fa;
   --adminlte-dark: #343a40;
 }
 
@@ -24,12 +25,13 @@ body {
 
 /* Navbar AdminLTE override */
 .main-header.navbar {
-  background-color: var(--primary) !important;
-  color: #fff !important;
+  background-color: var(--white) !important;
+  color: #212529 !important;
+  border-bottom: 1px solid #dee2e6;
 }
 .main-header .navbar-nav .nav-link,
 .main-header .navbar-brand {
-  color: #fff !important;
+  color: #212529 !important;
 }
 
 /* Sidebar AdminLTE override */

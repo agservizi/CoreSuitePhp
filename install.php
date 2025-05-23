@@ -637,17 +637,16 @@ function createAdminUser($data) {
 
 function saveConfig($config) {
     $configContent = "<?php\nreturn [\n";
-    $configContent .= "    'db_host' => '{$config['host']}',\n";
-    $configContent .= "    'db_name' => '{$config['name']}',\n";
-    $configContent .= "    'db_user' => '{$config['user']}',\n";
-    $configContent .= "    'db_pass' => '{$config['pass']}',\n";
+    $configContent .= "    'db_host' => '" . addslashes($config['host']) . "',\n";
+    $configContent .= "    'db_name' => '" . addslashes($config['name']) . "',\n";
+    $configContent .= "    'db_user' => '" . addslashes($config['user']) . "',\n";
+    $configContent .= "    'db_pass' => '" . addslashes($config['pass']) . "'\n";
     $configContent .= "];\n";
-    
-    if (!is_dir(__DIR__ . '/config')) {
-        mkdir(__DIR__ . '/config', 0755, true);
+    $dir = __DIR__ . '/config';
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
     }
-    
-    file_put_contents(__DIR__ . '/config/database.php', $configContent);
+    file_put_contents($dir . '/database.php', $configContent);
 }
 
 function getDatabaseConnection() {

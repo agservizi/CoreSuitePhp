@@ -27,31 +27,37 @@ CREATE TABLE IF NOT EXISTS contracts (
 
 CREATE TABLE IF NOT EXISTS addresses (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT,
     FOREIGN KEY (contract_id) REFERENCES contracts (id)
 );
 
 CREATE TABLE IF NOT EXISTS attachments (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT,
     FOREIGN KEY (contract_id) REFERENCES contracts (id)
 );
 
 CREATE TABLE IF NOT EXISTS consents (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    contract_id INT,
     FOREIGN KEY (contract_id) REFERENCES contracts (id)
 );
 
 CREATE TABLE IF NOT EXISTS notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    created_by INT,
     FOREIGN KEY (created_by) REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS audit_log (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS contract_drafts (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

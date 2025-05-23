@@ -1,4 +1,4 @@
-/* Tema base CoreSuite + override AdminLTE: palette blu elettrico, verde energia, bianco */
+/* Solo palette colori AdminLTE, senza variabili CoreSuite */
 :root {
   --primary: #3c8dbc;
   --secondary: #6c757d;
@@ -15,10 +15,6 @@
   --adminlte-gray: #6c757d;
   --adminlte-light: #f4f6f9;
   --adminlte-dark: #343a40;
-  --coresuite-blue: #0066CC;
-  --coresuite-green: #00AA44;
-  --coresuite-white: #FFFFFF;
-  --coresuite-dark: #1a2332;
 }
 
 body {

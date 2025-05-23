@@ -1,4 +1,4 @@
-/* Tema base CoreSuite: palette blu elettrico, verde energia, bianco */
+/* Tema base CoreSuite + override AdminLTE: palette blu elettrico, verde energia, bianco */
 :root {
   --coresuite-blue: #0066CC;
   --coresuite-green: #00AA44;
@@ -11,38 +11,64 @@ body {
   color: var(--coresuite-dark);
 }
 
-.navbar {
-  background: var(--coresuite-blue);
-  color: var(--coresuite-white);
+/* Navbar AdminLTE override */
+.main-header.navbar {
+  background-color: var(--coresuite-blue) !important;
+  color: var(--coresuite-white) !important;
+  border-bottom: 2px solid var(--coresuite-green);
+}
+.main-header .navbar-nav .nav-link,
+.main-header .navbar-brand {
+  color: var(--coresuite-white) !important;
 }
 
-.navbar .logo {
-  height: 36px;
-  margin-right: 16px;
+/* Sidebar AdminLTE override */
+.main-sidebar {
+  background-color: var(--coresuite-dark) !important;
+}
+.main-sidebar .brand-link {
+  background: var(--coresuite-dark) !important;
+  color: var(--coresuite-white) !important;
+  border-bottom: 1px solid var(--coresuite-blue);
+}
+.main-sidebar .nav-sidebar > .nav-item > .nav-link.active {
+  background: linear-gradient(90deg, var(--coresuite-blue), var(--coresuite-green));
+  color: var(--coresuite-white) !important;
+}
+.main-sidebar .nav-sidebar > .nav-item > .nav-link {
+  color: var(--coresuite-white) !important;
 }
 
-.sidebar {
-  background: var(--coresuite-dark);
-  color: var(--coresuite-white);
-}
-
+/* Card e box */
 .card {
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border: none;
+}
+.card-primary:not(.card-outline) > .card-header {
+  background: linear-gradient(90deg, var(--coresuite-blue), var(--coresuite-green));
+  color: var(--coresuite-white);
 }
 
-.btn-coresuite {
+/* Bottoni personalizzati */
+.btn-coresuite, .btn-primary {
   background: linear-gradient(135deg, var(--coresuite-blue), var(--coresuite-green));
-  color: var(--coresuite-white);
+  color: var(--coresuite-white) !important;
   border: none;
   border-radius: 8px;
   padding: 10px 24px;
   font-weight: 600;
   transition: background 0.2s;
 }
-
-.btn-coresuite:hover {
+.btn-coresuite:hover, .btn-primary:hover {
   background: linear-gradient(135deg, var(--coresuite-green), var(--coresuite-blue));
+}
+
+/* Footer */
+.main-footer {
+  background: var(--coresuite-blue);
+  color: var(--coresuite-white);
+  border-top: 2px solid var(--coresuite-green);
 }
 
 /* Tema scuro */
@@ -50,11 +76,47 @@ body.dark-mode {
   background: var(--coresuite-dark);
   color: var(--coresuite-white);
 }
-
-body.dark-mode .navbar {
-  background: #003366;
+body.dark-mode .main-header.navbar {
+  background: #003366 !important;
+}
+body.dark-mode .main-sidebar {
+  background: #222b3a !important;
+}
+body.dark-mode .main-footer {
+  background: #003366 !important;
 }
 
-body.dark-mode .sidebar {
-  background: #222b3a;
+/* Miglioramenti vari */
+::-webkit-scrollbar-thumb {
+  background: var(--coresuite-blue);
+}
+::-webkit-scrollbar-track {
+  background: var(--coresuite-white);
+}
+
+/* Fix per input e form */
+input.form-control, select.form-control, textarea.form-control {
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+}
+input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
+  border-color: var(--coresuite-blue);
+  box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+}
+
+/* Toast e alert */
+.toast {
+  background: var(--coresuite-blue);
+  color: var(--coresuite-white);
+  border-radius: 8px;
+}
+.alert-success {
+  background: var(--coresuite-green);
+  color: var(--coresuite-white);
+  border: none;
+}
+.alert-danger, .alert-error {
+  background: #e53935;
+  color: var(--coresuite-white);
+  border: none;
 }

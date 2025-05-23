@@ -1,6 +1,8 @@
 <?php
 namespace CoreSuite\Controllers;
 
+require_once __DIR__ . '/../models/User.php';
+
 use CoreSuite\Models\User;
 
 class AuthController

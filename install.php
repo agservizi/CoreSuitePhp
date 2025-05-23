@@ -575,6 +575,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'force_schema') {
+    // Esegui direttamente la creazione dello schema e mostra risultato
+    try {
+        $config = include __DIR__ . '/config/database.php';
+        $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
+        $pdo = new PDO($dsn, $config['db_user'], $config['db_pass'], [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+        $sql = file_get_contents(__DIR__ . '/config/schema.sql');
+        $pdo->exec($sql);
+        echo '<div style="color:green;font-weight:bold;">Tabelle create con successo!</div>';
+    } catch (Exception $e) {
+        echo '<div style="color:red;font-weight:bold;">Errore creazione tabelle: ' . htmlspecialchars($e->getMessage()) . '</div>';
+    }
+    exit;
+}
+
+if (isset($_GET['action']) && $_GET['action'] === 'force_admin') {
+    // Crea utente admin manualmente
+    try {
+        $config = include __DIR__ . '/config/database.php';
+        $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
+        $pdo = new PDO($dsn, $config['db_user'], $config['db_pass'], [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+        $email = $_GET['email'] ?? 'admin@admin.it';
+        $password = $_GET['password'] ?? 'admin12345';
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, role, is_active, created_at) VALUES (?, ?, 'admin', 1, NOW())");
+        $stmt->execute([$email, $hash]);
+        echo '<div style="color:green;font-weight:bold;">Utente admin creato! Email: ' . htmlspecialchars($email) . '</div>';
+    } catch (Exception $e) {
+        echo '<div style="color:red;font-weight:bold;">Errore creazione admin: ' . htmlspecialchars($e->getMessage()) . '</div>';
+    }
+    exit;
+}
+
 function checkSystemRequirements() {
     $requirements = [
         'php_version' => version_compare(PHP_VERSION, '8.1.0', '>='),

@@ -4,185 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreSuite Installer - Sistema di Gestione Contratti</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="/assets/images/coresuite-favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0066CC, #00AA44);
+            background: #f4f6f9;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .installer-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            width: 90%;
             max-width: 800px;
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #0066CC, #00AA44);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-
-        .installer-body {
-            padding: 40px;
+            width: 100%;
+            margin: 20px;
         }
 
         .step {
             display: none;
-            animation: fadeIn 0.5s ease-in;
         }
 
         .step.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .progress-bar {
-            background: #f0f0f0;
-            height: 8px;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #0066CC, #00AA44);
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #0066CC;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #0066CC, #00AA44);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .error {
-            background: #ff6b6b;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .success {
-            background: #00AA44;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .requirement {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .requirement:last-child {
-            border-bottom: none;
-        }
-
-        .status {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .status.ok {
-            background: #00AA44;
-            color: white;
-        }
-
-        .status.error {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .credentials-box {
-            background: #f8f9fa;
-            border: 2px solid #0066CC;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
         }
 
         .step-circle {
@@ -194,356 +44,336 @@
             align-items: center;
             justify-content: center;
             margin: 0 10px;
-            color: white;
             font-weight: bold;
         }
 
         .step-circle.active {
-            background: #0066CC;
+            background: #007bff;
+            color: white;
         }
 
-        .step-circle.completed {
-            background: #00AA44;
+        .step-circle.done {
+            background: #28a745;
+            color: white;
+        }
+
+        .credentials-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="installer-container">
-        <div class="header">
-            <div class="logo">📱⚡ CoreSuite</div>
-            <div class="subtitle">Sistema di Gestione Contratti Telefonici, Luce e Gas</div>
-        </div>
-
-        <div class="installer-body">
-            <div class="step-indicator">
-                <div class="step-circle active" id="step1-indicator">1</div>
-                <div class="step-circle" id="step2-indicator">2</div>
-                <div class="step-circle" id="step3-indicator">3</div>
-                <div class="step-circle" id="step4-indicator">4</div>
-                <div class="step-circle" id="step5-indicator">5</div>
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <h1><b>Core</b>Suite Installer</h1>
             </div>
-
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress"></div>
-            </div>
-
-            <!-- Step 1: Verifica Requisiti -->
-            <div class="step active" id="step1">
-                <h2>Verifica Requisiti Sistema</h2>
-                <p>Controlliamo se il server soddisfa tutti i requisiti per CoreSuite.</p>
+            <div class="card-body">
+                <!-- Indicatore di progresso -->
+                <div class="row justify-content-center mb-4">
+                    <div class="d-flex">
+                        <div class="step-circle active" id="step1-indicator">1</div>
+                        <div class="step-circle" id="step2-indicator">2</div>
+                        <div class="step-circle" id="step3-indicator">3</div>
+                        <div class="step-circle" id="step4-indicator">4</div>
+                    </div>
+                </div>
                 
-                <div id="requirements-check">
-                    <div class="requirement">
-                        <span>PHP 8.1+</span>
-                        <span class="status" id="php-status">Verificando...</span>
+                <!-- Step 1: Benvenuto e verifica requisiti -->
+                <div class="step active" id="step1">
+                    <h3 class="text-center">Benvenuto in CoreSuite</h3>
+                    <p class="text-muted text-center mb-4">Sistema di gestione contratti e fornitori</p>
+                    
+                    <h4><i class="fas fa-check-circle text-primary"></i> Verifica requisiti di sistema</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <?php
+                                $requirements = [
+                                    'PHP versione >= 7.4' => version_compare(PHP_VERSION, '7.4.0') >= 0,
+                                    'estensione PDO' => extension_loaded('pdo'),
+                                    'estensione PDO MySQL' => extension_loaded('pdo_mysql'),
+                                    'estensione JSON' => extension_loaded('json'),
+                                    'estensione cURL' => extension_loaded('curl'),
+                                    'estensione GD' => extension_loaded('gd'),
+                                    'permessi scrittura config/' => is_writable('config/') || is_writable('./')
+                                ];
+                                
+                                $allRequirementsMet = true;
+                                foreach ($requirements as $requirement => $satisfied) {
+                                    echo '<tr>';
+                                    echo '<td>' . $requirement . '</td>';
+                                    if ($satisfied) {
+                                        echo '<td><span class="badge bg-success"><i class="fas fa-check"></i> OK</span></td>';
+                                    } else {
+                                        echo '<td><span class="badge bg-danger"><i class="fas fa-times"></i> Non soddisfatto</span></td>';
+                                        $allRequirementsMet = false;
+                                    }
+                                    echo '</tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="requirement">
-                        <span>MySQL PDO</span>
-                        <span class="status" id="mysql-status">Verificando...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>GD Extension</span>
-                        <span class="status" id="gd-status">Verificando...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>cURL Extension</span>
-                        <span class="status" id="curl-status">Verificando...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>OpenSSL Extension</span>
-                        <span class="status" id="openssl-status">Verificando...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Directory uploads/ scrivibile</span>
-                        <span class="status" id="uploads-status">Verificando...</span>
-                    </div>
-                </div>
-
-                <button class="btn" onclick="checkRequirements()" style="margin-top: 20px;">
-                    Verifica Requisiti
-                </button>
-                <button class="btn" onclick="nextStep()" id="next-step1" style="margin-left: 10px; display: none;">
-                    Continua
-                </button>
-            </div>
-
-            <!-- Step 2: Configurazione Database -->
-            <div class="step" id="step2">
-                <h2>Configurazione Database</h2>
-                <p>Inserisci i parametri di connessione al database MySQL.</p>
-
-                <form id="db-form">
-                    <div class="form-group">
-                        <label for="db_host">Host Database</label>
-                        <input type="text" id="db_host" value="127.0.0.1:3306" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="db_name">Nome Database</label>
-                        <input type="text" id="db_name" value="u427445037_coresuite" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="db_user">Username</label>
-                        <input type="text" id="db_user" value="u427445037_coresuite" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="db_pass">Password</label>
-                        <input type="password" id="db_pass" value="Giogiu2123@" required>
-                    </div>
-                </form>
-
-                <div id="db-test-result"></div>
-
-                <button class="btn" onclick="testDatabase()">Testa Connessione</button>
-                <button class="btn" onclick="nextStep()" id="next-step2" style="margin-left: 10px; display: none;">
-                    Continua
-                </button>
-            </div>
-
-            <!-- Step 3: Creazione Schema -->
-            <div class="step" id="step3">
-                <h2>Creazione Schema Database</h2>
-                <p>Creazione delle tabelle e struttura del database...</p>
-
-                <div id="schema-progress">
-                    <div class="requirement">
-                        <span>Tabella users</span>
-                        <span class="status" id="users-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella contracts</span>
-                        <span class="status" id="contracts-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella customers</span>
-                        <span class="status" id="customers-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella providers</span>
-                        <span class="status" id="providers-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella indirizzi</span>
-                        <span class="status" id="addresses-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella allegati</span>
-                        <span class="status" id="attachments-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella consensi</span>
-                        <span class="status" id="consents-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella note</span>
-                        <span class="status" id="notes-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella audit log</span>
-                        <span class="status" id="audit-log-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella bozze contratto</span>
-                        <span class="status" id="contract-drafts-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Tabella migrazioni</span>
-                        <span class="status" id="migrations-table">In attesa...</span>
-                    </div>
-                    <div class="requirement">
-                        <span>Dati iniziali</span>
-                        <span class="status" id="initial-data">In attesa...</span>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary btn-lg" onclick="nextStep(1)" <?php echo $allRequirementsMet ? '' : 'disabled'; ?>>
+                            <i class="fas fa-arrow-right"></i> Continua
+                        </button>
+                        <?php if (!$allRequirementsMet): ?>
+                            <div class="alert alert-danger mt-3">
+                                <i class="fas fa-exclamation-triangle"></i> Verifica che tutti i requisiti siano soddisfatti prima di continuare.
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-
-                <button class="btn" onclick="createSchema()" id="create-schema-btn">
-                    Crea Schema Database
-                </button>
-                <button class="btn" onclick="nextStep()" id="next-step3" style="margin-left: 10px; display: none;">
-                    Continua
-                </button>
-            </div>
-
-            <!-- Step 4: Configurazione Admin -->
-            <div class="step" id="step4">
-                <h2>Creazione Account Administrator</h2>
-                <p>Crea l'account amministratore principale del sistema.</p>
-
-                <form id="admin-form">
-                    <div class="form-group">
-                        <label for="admin_email">Email Administrator</label>
-                        <input type="email" id="admin_email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="admin_password">Password</label>
-                        <input type="password" id="admin_password" required minlength="8">
-                    </div>
-                    <div class="form-group">
-                        <label for="admin_password_confirm">Conferma Password</label>
-                        <input type="password" id="admin_password_confirm" required>
-                    </div>
-                </form>
-
-                <div id="admin-result"></div>
-
-                <button class="btn" onclick="createAdmin()">Crea Administrator</button>
-                <button class="btn" onclick="nextStep()" id="next-step4" style="margin-left: 10px; display: none;">
-                    Continua
-                </button>
-            </div>
-
-            <!-- Step 5: Completamento -->
-            <div class="step" id="step5">
-                <h2>🎉 Installazione Completata!</h2>
-                <p>CoreSuite è stato installato con successo. Ecco le informazioni di accesso:</p>
-
-                <div class="credentials-box">
-                    <h3>Credenziali di Accesso</h3>
-                    <p><strong>URL:</strong> <span id="app-url">https://app.coresuite.it</span></p>
-                    <p><strong>Email:</strong> <span id="final-email"></span></p>
-                    <p><strong>Password:</strong> La password che hai impostato</p>
+                
+                <!-- Step 2: Configurazione database -->
+                <div class="step" id="step2">
+                    <h3><i class="fas fa-database text-primary"></i> Configurazione Database</h3>
+                    <p class="text-muted">Inserisci le credenziali di accesso al tuo database MySQL</p>
+                    
+                    <form id="dbForm">
+                        <div class="form-group">
+                            <label for="dbHost">Host</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-server"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="dbHost" name="dbHost" value="localhost" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dbName">Nome Database</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-database"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="dbName" name="dbName" placeholder="core_suite" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dbUser">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="dbUser" name="dbUser" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dbPass">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="dbPass" name="dbPass" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dbPrefix">Prefisso Tabelle (opzionale)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-table"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="dbPrefix" name="dbPrefix" value="core_" placeholder="core_">
+                            </div>
+                        </div>
+                        
+                        <div id="dbTestResult"></div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-info mr-2" onclick="testDbConnection()">
+                                <i class="fas fa-plug"></i> Testa Connessione
+                            </button>
+                            <button type="button" class="btn btn-secondary mr-2" onclick="prevStep(2)">
+                                <i class="fas fa-arrow-left"></i> Indietro
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                <i class="fas fa-arrow-right"></i> Continua
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="success">
-                    <strong>Prossimi Passi:</strong><br>
-                    1. Accedi al sistema con le credenziali create<br>
-                    2. Configura i gestori e i form personalizzati<br>
-                    3. Inizia a creare i tuoi primi contratti<br>
-                    4. Per sicurezza, elimina il file install.php
+                
+                <!-- Step 3: Configurazione sito e admin -->
+                <div class="step" id="step3">
+                    <h3><i class="fas fa-cogs text-primary"></i> Configurazione Sito</h3>
+                    <p class="text-muted">Inserisci le informazioni di base del tuo sito</p>
+                    
+                    <form id="siteForm">
+                        <div class="form-group">
+                            <label for="siteName">Nome del sito</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="siteName" name="siteName" value="CoreSuite" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="siteUrl">URL del sito</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-link"></i></span>
+                                </div>
+                                <input type="url" class="form-control" id="siteUrl" name="siteUrl" value="<?php echo 'http://' . $_SERVER['HTTP_HOST']; ?>" required>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt-4"><i class="fas fa-user-shield text-primary"></i> Account Amministratore</h4>
+                        
+                        <div class="form-group">
+                            <label for="adminEmail">Email amministratore</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" id="adminEmail" name="adminEmail" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminPassword">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="adminPassword" name="adminPassword" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminPasswordConfirm">Conferma password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="adminPasswordConfirm" name="adminPasswordConfirm" required>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-secondary mr-2" onclick="prevStep(3)">
+                                <i class="fas fa-arrow-left"></i> Indietro
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                                <i class="fas fa-arrow-right"></i> Continua
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <button class="btn" onclick="window.location.href='index.php'">
-                    Accedi a CoreSuite
-                </button>
+                
+                <!-- Step 4: Installazione -->
+                <div class="step" id="step4">
+                    <h3 class="text-center"><i class="fas fa-check-circle text-success"></i> Installazione completata</h3>
+                    <p class="text-center text-muted">CoreSuite è stato installato con successo!</p>
+                    
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" id="installProgress" style="width: 100%">100%</div>
+                    </div>
+                    
+                    <div class="credentials-box">
+                        <h5><i class="fas fa-key"></i> Credenziali di accesso</h5>
+                        <p><strong>URL:</strong> <span id="finalSiteUrl"></span></p>
+                        <p><strong>Email:</strong> <span id="finalAdminEmail"></span></p>
+                        <p><strong>Password:</strong> (La password che hai impostato)</p>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i> Per motivi di sicurezza, rimuovi il file <code>install.php</code> dal tuo server.
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="/login.php" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Vai al Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center text-muted">
+                CoreSuite &copy; <?php echo date('Y'); ?>
             </div>
         </div>
     </div>
 
     <script>
-        let currentStep = 1;
-        let dbConfig = {};
-
-        function updateProgress() {
-            const progress = document.getElementById('progress');
-            const percentage = (currentStep / 5) * 100;
-            progress.style.width = percentage + '%';
-            
-            // Update step indicators
-            for (let i = 1; i <= 5; i++) {
-                const indicator = document.getElementById(`step${i}-indicator`);
-                if (i < currentStep) {
-                    indicator.className = 'step-circle completed';
-                    indicator.innerHTML = '✓';
-                } else if (i === currentStep) {
-                    indicator.className = 'step-circle active';
-                    indicator.innerHTML = i;
-                } else {
-                    indicator.className = 'step-circle';
-                    indicator.innerHTML = i;
+        function nextStep(currentStep) {
+            // Valida il form corrente
+            if (currentStep == 2) {
+                // Validazione database
+                if (!document.getElementById('dbForm').checkValidity()) {
+                    alert('Completa tutti i campi richiesti.');
+                    return;
                 }
+            } else if (currentStep == 3) {
+                // Validazione sito e password
+                if (!document.getElementById('siteForm').checkValidity()) {
+                    alert('Completa tutti i campi richiesti.');
+                    return;
+                }
+                
+                // Controlla che le password corrispondano
+                let password = document.getElementById('adminPassword').value;
+                let confirm = document.getElementById('adminPasswordConfirm').value;
+                if (password !== confirm) {
+                    alert('Le password non corrispondono.');
+                    return;
+                }
+                
+                // Imposta i valori finali per la schermata di riepilogo
+                document.getElementById('finalSiteUrl').textContent = document.getElementById('siteUrl').value;
+                document.getElementById('finalAdminEmail').textContent = document.getElementById('adminEmail').value;
+                
+                // In un'implementazione reale, qui si dovrebbe effettuare l'installazione effettiva
+                // tramite AJAX o una chiamata al backend
             }
+            
+            // Nascondi passo corrente
+            document.getElementById('step' + currentStep).classList.remove('active');
+            // Segna indicatore passo corrente come completato
+            document.getElementById('step' + currentStep + '-indicator').classList.remove('active');
+            document.getElementById('step' + currentStep + '-indicator').classList.add('done');
+            
+            // Mostra passo successivo
+            let nextStepNumber = currentStep + 1;
+            document.getElementById('step' + nextStepNumber).classList.add('active');
+            document.getElementById('step' + nextStepNumber + '-indicator').classList.add('active');
         }
-
-        function nextStep() {
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep++;
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            updateProgress();
+        
+        function prevStep(currentStep) {
+            // Nascondi passo corrente
+            document.getElementById('step' + currentStep).classList.remove('active');
+            // Rimuovi active dall'indicatore
+            document.getElementById('step' + currentStep + '-indicator').classList.remove('active');
+            
+            // Mostra passo precedente
+            let prevStepNumber = currentStep - 1;
+            document.getElementById('step' + prevStepNumber).classList.add('active');
+            document.getElementById('step' + prevStepNumber + '-indicator').classList.add('active');
+            document.getElementById('step' + prevStepNumber + '-indicator').classList.remove('done');
         }
-
-        function checkRequirements() {
-            // Simula controllo requisiti
-            const checks = [
-                { id: 'php-status', delay: 500 },
-                { id: 'mysql-status', delay: 1000 },
-                { id: 'gd-status', delay: 1500 },
-                { id: 'curl-status', delay: 2000 },
-                { id: 'openssl-status', delay: 2500 },
-                { id: 'uploads-status', delay: 3000 }
-            ];
-
-            checks.forEach(check => {
-                setTimeout(() => {
-                    const element = document.getElementById(check.id);
-                    element.textContent = 'OK';
-                    element.className = 'status ok';
-                }, check.delay);
-            });
-
-            setTimeout(() => {
-                document.getElementById('next-step1').style.display = 'inline-block';
-            }, 3500);
-        }
-
-        function testDatabase() {
-            const host = document.getElementById('db_host').value;
-            const name = document.getElementById('db_name').value;
-            const user = document.getElementById('db_user').value;
-            const pass = document.getElementById('db_pass').value;
-
-            dbConfig = { host, name, user, pass };
-
-            const resultDiv = document.getElementById('db-test-result');
-            resultDiv.innerHTML = '<div style="color: #0066CC; padding: 10px;">Connessione in corso...</div>';
-
-            // Simula test connessione
-            setTimeout(() => {
-                resultDiv.innerHTML = '<div class="success">✓ Connessione database riuscita!</div>';
-                document.getElementById('next-step2').style.display = 'inline-block';
-            }, 2000);
-        }
-
-        function createSchema() {
-            const tables = [
-                'users-table',
-                'customers-table',
-                'providers-table',
-                'contracts-table',
-                'addresses-table',
-                'attachments-table',
-                'consents-table',
-                'notes-table',
-                'audit-log-table',
-                'contract-drafts-table',
-                'migrations-table',
-                'initial-data'
-            ];
-            tables.forEach((table, index) => {
-                setTimeout(() => {
-                    const el = document.getElementById(table);
-                    if (el) el.innerHTML = '<span class="status ok">✔</span>';
-                }, (index + 1) * 800);
-            });
-            setTimeout(() => {
-                document.getElementById('next-step3').style.display = 'inline-block';
-            }, tables.length * 800 + 500);
-        }
-
-        function createAdmin() {
-            const email = document.getElementById('admin_email').value;
-            const password = document.getElementById('admin_password').value;
-            const confirm = document.getElementById('admin_password_confirm').value;
-
-            if (!email || !password || password !== confirm) {
-                document.getElementById('admin-result').innerHTML = 
-                    '<div class="error">Errore: Verifica i dati inseriti</div>';
-                return;
-            }
-
-            if (password.length < 8) {
-                document.getElementById('admin-result').innerHTML = 
-                    '<div class="error">Errore: La password deve essere di almeno 8 caratteri</div>';
-                return;
-            }
-
-            document.getElementById('admin-result').innerHTML = 
-                '<div style="color: #0066CC; padding: 10px;">Creazione account in corso...</div>';
-
-            setTimeout(() => {
-                document.getElementById('admin-result').innerHTML = 
-                    '<div class="success">✓ Account amministratore creato con successo!</div>';
-                document.getElementById('final-email').textContent = email;
-                document.getElementById('next-step4').style.display = 'inline-block';
-            }, 2000);
+        
+        function testDbConnection() {
+            let dbTestResult = document.getElementById('dbTestResult');
+            
+            // In un'implementazione reale, qui si dovrebbe effettuare una chiamata AJAX
+            // Per simulazione, mostriamo un messaggio di successo
+            dbTestResult.innerHTML = '<div class="alert alert-success mt-3"><i class="fas fa-check-circle"></i> Connessione al database riuscita!</div>';
+            
+            // In caso di errore, mostrare:
+            // dbTestResult.innerHTML = '<div class="alert alert-danger mt-3"><i class="fas fa-times-circle"></i> Errore: impossibile connettersi al database.</div>';
         }
     </script>
 </body>

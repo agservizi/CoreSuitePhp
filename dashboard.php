@@ -24,13 +24,13 @@ if (!isset($_SESSION['user_id'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-primary navbar-dark">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="dashboard.php" class="nav-link">Dashboard</a>
+                <a href="/dashboard.php" class="nav-link active">Dashboard</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="far fa-user"></i> <?= htmlspecialchars($_SESSION['role']) ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="logout.php" class="dropdown-item">Logout</a>
+                    <a href="/logout.php" class="dropdown-item">Logout</a>
                 </div>
             </li>
         </ul>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="dashboard.php" class="brand-link">
+        <a href="/dashboard.php" class="brand-link">
             <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image" style="opacity: .8">
             <span class="brand-text font-weight-light">CoreSuite</span>
         </a>
@@ -56,33 +56,27 @@ if (!isset($_SESSION['user_id'])) {
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                     <li class="nav-item">
-                        <a href="dashboard.php" class="nav-link active">
+                        <a href="/dashboard.php" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="contracts.php" class="nav-link">
+                        <a href="/contracts.php" class="nav-link">
                             <i class="nav-icon fas fa-file-contract"></i>
                             <p>Contratti</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="customers.php" class="nav-link">
+                        <a href="/customers.php" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Clienti</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="providers.php" class="nav-link">
+                        <a href="/providers.php" class="nav-link">
                             <i class="nav-icon fas fa-building"></i>
                             <p>Provider</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="notifications.php" class="nav-link">
-                            <i class="nav-icon fas fa-bell"></i>
-                            <p>Notifiche</p>
                         </a>
                     </li>
                 </ul>
@@ -99,7 +93,6 @@ if (!isset($_SESSION['user_id'])) {
                         <h1 class="m-0">Dashboard</h1>
                     </div>
                 </div>
-                <?php include __DIR__ . '/src/views/dashboard/stats_box.php'; ?>
             </div>
         </div>
         <section class="content">
@@ -170,59 +163,46 @@ if (!isset($_SESSION['user_id'])) {
     <!-- /.content-wrapper -->
 
     <footer class="main-footer text-center">
-        <strong>CoreSuite &copy; <?= date('Y') ?></strong> - Tutti i diritti riservati.
+        <strong>CoreSuite &copy; <?php echo date('Y'); ?></strong> - Tutti i diritti riservati.
     </footer>
 </div>
 <script>
-    // Animazione contatori (demo, da collegare a API reali)
-    function animateValue(id, start, end, duration, prefix = '', suffix = '') {
-        let range = end - start;
-        let current = start;
-        let increment = range / (duration / 20);
-        let obj = document.getElementById(id);
-        let step = 0;
-        let timer = setInterval(function() {
-            current += increment;
-            step++;
-            if ((increment > 0 && current >= end) || (increment < 0 && current <= end) || step > 100) {
-                current = end;
-                clearInterval(timer);
+    // Script per caricare dati dashboard
+    $(function() {
+        $.getJSON('/api/v1/stats.php', function(data) {
+            $('#contracts-total').text(data.contracts_count || 0);
+            $('#customers-total').text(data.customers_count || 0);
+            $('#revenue-month').text('€' + (data.revenue_month || 0));
+            $('#performance-kpi').text((data.performance || 0) + '%');
+            
+            // Grafici
+            if (data.contracts_by_month) {
+                new Chart(document.getElementById('contractsChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: data.contracts_by_month.labels,
+                        datasets: [{
+                            label: 'Contratti',
+                            data: data.contracts_by_month.data,
+                            backgroundColor: '#3c8dbc'
+                        }]
+                    }
+                });
             }
-            obj.textContent = prefix + Math.floor(current) + suffix;
-        }, 20);
-    }
-    animateValue('contracts-total', 0, 120, 1000);
-    animateValue('customers-total', 0, 80, 1000);
-    animateValue('revenue-month', 0, 32000, 1200, '€');
-    animateValue('performance-kpi', 0, 87, 900, '', '%');
-    // Chart.js demo (da collegare a API reali)
-    const ctx1 = document.getElementById('contractsChart').getContext('2d');
-    new Chart(ctx1, {
-        type: 'line',
-        data: {
-            labels: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug'],
-            datasets: [{
-                label: 'Contratti per mese',
-                data: [12, 19, 15, 22, 30, 28, 35],
-                borderColor: '#0066CC',
-                backgroundColor: 'rgba(0,102,204,0.1)',
-                tension: 0.3,
-                fill: true
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-    });
-    const ctx2 = document.getElementById('providersChart').getContext('2d');
-    new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: ['Fastweb', 'Windtre', 'Pianeta Fibra', 'Enel Energia', 'A2A Energia'],
-            datasets: [{
-                data: [30, 20, 15, 25, 10],
-                backgroundColor: ['#0066CC', '#00AA44', '#FFB300', '#FF5252', '#7C4DFF']
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            
+            if (data.providers_share) {
+                new Chart(document.getElementById('providersChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.providers_share.labels,
+                        datasets: [{
+                            data: data.providers_share.data,
+                            backgroundColor: ['#3c8dbc', '#00a65a', '#f39c12', '#dd4b39', '#605ca8']
+                        }]
+                    }
+                });
+            }
+        });
     });
 </script>
 </body>

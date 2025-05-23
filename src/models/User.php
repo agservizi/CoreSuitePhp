@@ -13,7 +13,8 @@ class User
 
     public static function getDb()
     {
-        $config = include __DIR__ . '/../../../config/database.php';
+        // Usa percorso assoluto dalla root del progetto
+        $config = include dirname(__DIR__, 2) . '/config/database.php';
         $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
         return new \PDO($dsn, $config['db_user'], $config['db_pass'], [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,

@@ -594,7 +594,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'force_schema') {
 }
 
 if (isset($_GET['action']) && $_GET['action'] === 'force_admin') {
-    // Crea utente admin manualmente
+    // Crea utente admin solo se non esiste già
     try {
         $config = include __DIR__ . '/config/database.php';
         $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
@@ -605,9 +605,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'force_admin') {
         $email = $_GET['email'] ?? 'admin@admin.it';
         $password = $_GET['password'] ?? 'admin12345';
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, role, is_active, created_at) VALUES (?, ?, 'admin', 1, NOW())");
-        $stmt->execute([$email, $hash]);
-        echo '<div style="color:green;font-weight:bold;">Utente admin creato! Email: ' . htmlspecialchars($email) . '</div>';
+        $check = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+        $check->execute([$email]);
+        if ($check->fetchColumn() > 0) {
+            echo '<div style="color:orange;font-weight:bold;">Utente admin già esistente con questa email!</div>';
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, role, is_active, created_at) VALUES (?, ?, 'admin', 1, NOW())");
+            $stmt->execute([$email, $hash]);
+            echo '<div style="color:green;font-weight:bold;">Utente admin creato! Email: ' . htmlspecialchars($email) . '</div>';
+        }
     } catch (Exception $e) {
         echo '<div style="color:red;font-weight:bold;">Errore creazione admin: ' . htmlspecialchars($e->getMessage()) . '</div>';
     }

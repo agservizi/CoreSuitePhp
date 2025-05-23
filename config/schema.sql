@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS providers (
 
 CREATE TABLE IF NOT EXISTS contracts (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    provider INT,
     FOREIGN KEY (provider) REFERENCES providers (id)
 );
 

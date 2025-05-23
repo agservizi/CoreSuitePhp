@@ -450,6 +450,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'force_admin') {
     exit;
 }
 
+// Configurazione database predefinita per installazione
+$dbConfig = [
+    'db_host' => '127.0.0.1',
+    'db_name' => 'u427445037_coresuite',
+    'db_user' => 'u427445037_coresuite',
+    'db_pass' => 'Giogiu2123@',
+];
+
 function checkSystemRequirements() {
     $requirements = [
         'php_version' => version_compare(PHP_VERSION, '8.1.0', '>='),

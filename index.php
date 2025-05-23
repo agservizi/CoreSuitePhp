@@ -20,9 +20,7 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" style="height:48px;"><br>
+<div class="login-box">    <div class="login-logo">
         <b>CoreSuite</b>
     </div>
     <div class="card card-outline card-primary">

@@ -43,8 +43,8 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="dashboard.php" class="brand-link">
-            <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image" style="opacity: .8">
-            <span class="brand-text font-weight-light">CoreSuite</span>
+            <span class="brand-text font-weight-light ml-3">CoreSuite</span>
+            
         </a>
         <div class="sidebar">
             <nav class="mt-2">
@@ -138,12 +138,11 @@
                             <?php if (empty($customers)): ?>
                                 <tr><td colspan="7" class="text-center text-muted">Nessun cliente disponibile.</td></tr>
                             <?php else: ?>
-                            <?php foreach ($customers as $c): ?>
-                                <tr>
+                            <?php foreach ($customers as $c): ?>                                <tr>
                                     <td><?= htmlspecialchars($c['id']) ?></td>
-                                    <td><?= htmlspecialchars($c['name']) ?></td>
-                                    <td><?= htmlspecialchars($c['surname']) ?></td>
-                                    <td><?= htmlspecialchars($c['fiscal_code']) ?></td>
+                                    <td><?= htmlspecialchars($c['first_name']) ?></td>
+                                    <td><?= htmlspecialchars($c['last_name']) ?></td>
+                                    <td><?= htmlspecialchars($c['tax_code']) ?></td>
                                     <td><?= htmlspecialchars($c['email']) ?></td>
                                     <td><?= htmlspecialchars($c['phone']) ?></td>
                                     <td>

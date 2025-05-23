@@ -2,15 +2,35 @@
 namespace CoreSuite\Models;
 
 class Contract
-{
+{    
+    public static function getDb()
+    {
+        static $db = null;
+        if ($db === null) {
+            require_once __DIR__ . '/../../config/database.php';
+            $db = new \PDO(
+                'mysql:host=' . $GLOBALS['DB_HOST'] . ';dbname=' . $GLOBALS['DB_NAME'] . ';charset=utf8mb4',
+                $GLOBALS['DB_USER'],
+                $GLOBALS['DB_PASS'],
+                [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+            );
+        }
+        return $db;
+    }
+    
     public static function allForUser($userId, $role)
     {
         $db = self::getDb();
         if ($role === 'admin') {
-            $stmt = $db->query('SELECT * FROM contracts');
+            $stmt = $db->query('SELECT c.*, p.name as provider_name, CONCAT(cu.first_name, " ", cu.last_name) as customer_name FROM contracts c 
+                               LEFT JOIN providers p ON c.provider = p.id 
+                               LEFT JOIN customers cu ON c.customer_id = cu.id');
             return $stmt->fetchAll();
         } else {
-            $stmt = $db->prepare('SELECT * FROM contracts WHERE user_id = ?');
+            $stmt = $db->prepare('SELECT c.*, p.name as provider_name, CONCAT(cu.first_name, " ", cu.last_name) as customer_name FROM contracts c 
+                               LEFT JOIN providers p ON c.provider = p.id 
+                               LEFT JOIN customers cu ON c.customer_id = cu.id 
+                               WHERE c.user_id = ?');
             $stmt->execute([$userId]);
             return $stmt->fetchAll();
         }
@@ -19,7 +39,10 @@ class Contract
     public static function find($id)
     {
         $db = self::getDb();
-        $stmt = $db->prepare('SELECT * FROM contracts WHERE id = ?');
+        $stmt = $db->prepare('SELECT c.*, p.name as provider_name, CONCAT(cu.first_name, " ", cu.last_name) as customer_name FROM contracts c 
+                               LEFT JOIN providers p ON c.provider = p.id 
+                               LEFT JOIN customers cu ON c.customer_id = cu.id 
+                               WHERE c.id = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
@@ -43,6 +66,7 @@ class Contract
             $data['customer_id'],
             $data['extra_data']
         ]);
+        return $db->lastInsertId();
     }
 
     public static function updateStatus($id, $status)
@@ -50,15 +74,5 @@ class Contract
         $db = self::getDb();
         $stmt = $db->prepare('UPDATE contracts SET status = ?, updated_at = NOW() WHERE id = ?');
         $stmt->execute([$status, $id]);
-    }
-
-    public static function getDb()
-    {
-        $config = include __DIR__ . '/../../../config/database.php';
-        $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
-        return new \PDO($dsn, $config['db_user'], $config['db_pass'], [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-        ]);
     }
 }

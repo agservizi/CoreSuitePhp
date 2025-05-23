@@ -62,8 +62,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="/dashboard.php" class="brand-link">
-            <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">CoreSuite</span>
+            <span class="brand-text font-weight-light ml-3">CoreSuite</span>
+            
         </a>
 
         <!-- Sidebar -->
@@ -143,13 +143,12 @@
                                             <div class="col-12">
                                                 <h4>Informazioni Cliente</h4>
                                                 <div class="post">
-                                                    <dl class="row">
-                                                        <dt class="col-sm-3">Nome</dt>
-                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['name']) ?></dd>
+                                                    <dl class="row">                                                        <dt class="col-sm-3">Nome</dt>
+                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['first_name']) ?></dd>
                                                         <dt class="col-sm-3">Cognome</dt>
-                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['surname']) ?></dd>
+                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['last_name']) ?></dd>
                                                         <dt class="col-sm-3">Codice Fiscale</dt>
-                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['fiscal_code']) ?></dd>
+                                                        <dd class="col-sm-9"><?= htmlspecialchars($customer['tax_code']) ?></dd>
                                                         <dt class="col-sm-3">Data di nascita</dt>
                                                         <dd class="col-sm-9"><?= htmlspecialchars($customer['date_of_birth']) ?></dd>
                                                         <dt class="col-sm-3">Luogo di nascita</dt>
@@ -188,13 +187,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                                        <h3 class="text-primary"><i class="fas fa-user"></i> <?= htmlspecialchars($customer['name']) ?> <?= htmlspecialchars($customer['surname']) ?></h3>
+                                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">                                        <h3 class="text-primary"><i class="fas fa-user"></i> <?= htmlspecialchars($customer['first_name']) ?> <?= htmlspecialchars($customer['last_name']) ?></h3>
                                         <p class="text-muted">Cliente #<?= htmlspecialchars($customer['id']) ?></p>
                                         <br>
                                         <div class="text-muted">
                                             <p class="text-sm">Codice Fiscale
-                                                <b class="d-block"><?= htmlspecialchars($customer['fiscal_code']) ?></b>
+                                                <b class="d-block"><?= htmlspecialchars($customer['tax_code']) ?></b>
                                             </p>
                                             <p class="text-sm">Email
                                                 <b class="d-block"><?= htmlspecialchars($customer['email']) ?></b>

@@ -43,8 +43,8 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="dashboard.php" class="brand-link">
-            <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image" style="opacity: .8">
-            <span class="brand-text font-weight-light">CoreSuite</span>
+            <span class="brand-text font-weight-light ml-3">CoreSuite</span>
+            
         </a>
         <div class="sidebar">
             <nav class="mt-2">
@@ -104,10 +104,13 @@
                                 <h3 class="card-title">Modifica dati provider</h3>
                             </div>
                             <form method="post">
-                                <div class="card-body">
-                                    <div class="form-group">
+                                <div class="card-body">                                    <div class="form-group">
                                         <label for="name">Nome</label>
                                         <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($provider['name']) ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="code">Codice</label>
+                                        <input type="text" name="code" id="code" class="form-control" value="<?= htmlspecialchars($provider['code']) ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="type">Tipo</label>

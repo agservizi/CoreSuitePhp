@@ -2,7 +2,21 @@
 namespace CoreSuite\Models;
 
 class Customer
-{
+{    public static function getDb()
+    {
+        static $db = null;
+        if ($db === null) {
+            require_once __DIR__ . '/../../config/database.php';
+            $db = new \PDO(
+                'mysql:host=' . $GLOBALS['DB_HOST'] . ';dbname=' . $GLOBALS['DB_NAME'] . ';charset=utf8mb4',
+                $GLOBALS['DB_USER'],
+                $GLOBALS['DB_PASS'],
+                [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+            );
+        }
+        return $db;
+    }
+    
     public static function all()
     {
         $db = self::getDb();
@@ -16,25 +30,44 @@ class Customer
         $stmt = $db->prepare('SELECT * FROM customers WHERE id = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
-    }
-
-    public static function create($data)
+    }    public static function create($data)
     {
         $db = self::getDb();
-        $stmt = $db->prepare('INSERT INTO customers (name, surname, fiscal_code, phone, email, created_at, date_of_birth, place_of_birth, document_type, document_number, document_expiry, mobile, notes) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO customers (first_name, last_name, tax_code, phone, email, date_of_birth, place_of_birth, document_type, document_number, document_expiry, mobile, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute([
-            $data['name'], $data['surname'], $data['fiscal_code'], $data['phone'], $data['email'],
-            $data['date_of_birth'], $data['place_of_birth'], $data['document_type'], $data['document_number'], $data['document_expiry'], $data['mobile'], $data['notes']
+            $data['first_name'], 
+            $data['last_name'], 
+            $data['tax_code'], 
+            $data['phone'], 
+            $data['email'], 
+            $data['date_of_birth'] ?? null,
+            $data['place_of_birth'] ?? null,
+            $data['document_type'] ?? null,
+            $data['document_number'] ?? null,
+            $data['document_expiry'] ?? null,
+            $data['mobile'] ?? null,
+            $data['notes']
         ]);
     }
 
     public static function update($id, $data)
     {
         $db = self::getDb();
-        $stmt = $db->prepare('UPDATE customers SET name=?, surname=?, fiscal_code=?, phone=?, email=?, date_of_birth=?, place_of_birth=?, document_type=?, document_number=?, document_expiry=?, mobile=?, notes=? WHERE id=?');
+        $stmt = $db->prepare('UPDATE customers SET first_name=?, last_name=?, tax_code=?, phone=?, email=?, date_of_birth=?, place_of_birth=?, document_type=?, document_number=?, document_expiry=?, mobile=?, notes=? WHERE id=?');
         $stmt->execute([
-            $data['name'], $data['surname'], $data['fiscal_code'], $data['phone'], $data['email'],
-            $data['date_of_birth'], $data['place_of_birth'], $data['document_type'], $data['document_number'], $data['document_expiry'], $data['mobile'], $data['notes'], $id
+            $data['first_name'], 
+            $data['last_name'], 
+            $data['tax_code'], 
+            $data['phone'], 
+            $data['email'], 
+            $data['date_of_birth'] ?? null,
+            $data['place_of_birth'] ?? null,
+            $data['document_type'] ?? null,
+            $data['document_number'] ?? null,
+            $data['document_expiry'] ?? null,
+            $data['mobile'] ?? null,
+            $data['notes'],
+            $id
         ]);
     }
 
@@ -43,9 +76,7 @@ class Customer
         $db = self::getDb();
         $stmt = $db->prepare('DELETE FROM customers WHERE id = ?');
         $stmt->execute([$id]);
-    }
-
-    public static function allForUser($userId, $role)
+    }    public static function allForUser($userId, $role)
     {
         $db = self::getDb();
         if ($role === 'admin') {
@@ -56,15 +87,5 @@ class Customer
             $stmt->execute([$userId]);
             return $stmt->fetchAll();
         }
-    }
-
-    public static function getDb()
-    {
-        $config = include __DIR__ . '/../../../config/database.php';
-        $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
-        return new \PDO($dsn, $config['db_user'], $config['db_pass'], [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-        ]);
     }
 }

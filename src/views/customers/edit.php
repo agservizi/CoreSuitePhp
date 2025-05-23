@@ -62,8 +62,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="/dashboard.php" class="brand-link">
-            <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">CoreSuite</span>
+            <span class="brand-text font-weight-light ml-3">CoreSuite</span>
+            
         </a>
 
         <!-- Sidebar -->
@@ -143,18 +143,17 @@
                             <form method="post">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="name">Nome</label>
-                                                <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($customer['name']) ?>" required>
+                                        <div class="col-md-6">                                            <div class="form-group">
+                                                <label for="first_name">Nome</label>
+                                                <input type="text" name="first_name" id="first_name" class="form-control" value="<?= htmlspecialchars($customer['first_name']) ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="surname">Cognome</label>
-                                                <input type="text" name="surname" id="surname" class="form-control" value="<?= htmlspecialchars($customer['surname']) ?>" required>
+                                                <label for="last_name">Cognome</label>
+                                                <input type="text" name="last_name" id="last_name" class="form-control" value="<?= htmlspecialchars($customer['last_name']) ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="fiscal_code">Codice Fiscale</label>
-                                                <input type="text" name="fiscal_code" id="fiscal_code" class="form-control" value="<?= htmlspecialchars($customer['fiscal_code']) ?>" required maxlength="16">
+                                                <label for="tax_code">Codice Fiscale</label>
+                                                <input type="text" name="tax_code" id="tax_code" class="form-control" value="<?= htmlspecialchars($customer['tax_code']) ?>" required maxlength="16">
                                             </div>
                                             <div class="form-group">
                                                 <label for="date_of_birth">Data di nascita</label>

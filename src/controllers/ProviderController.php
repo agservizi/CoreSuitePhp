@@ -25,15 +25,14 @@ class ProviderController
     public function create()
     {
         require __DIR__ . '/../views/providers/create.php';
-    }
-
-    public function store()
+    }    public function store()
     {
         $data = [
             'name' => $_POST['name'] ?? '',
             'type' => $_POST['type'] ?? '',
+            'code' => $_POST['code'] ?? '',
             'logo' => $_POST['logo'] ?? '',
-            'form_config' => json_decode($_POST['form_config'] ?? '[]', true)
+            'form_config' => $_POST['form_config'] ?? '[]'
         ];
         if (!$data['name'] || !$data['type']) {
             $error = 'Nome e tipo sono obbligatori.';
@@ -49,15 +48,14 @@ class ProviderController
     {
         $provider = Provider::find($id);
         require __DIR__ . '/../views/providers/edit.php';
-    }
-
-    public function update($id)
+    }    public function update($id)
     {
         $data = [
             'name' => $_POST['name'] ?? '',
             'type' => $_POST['type'] ?? '',
+            'code' => $_POST['code'] ?? '',
             'logo' => $_POST['logo'] ?? '',
-            'form_config' => json_decode($_POST['form_config'] ?? '[]', true)
+            'form_config' => $_POST['form_config'] ?? '[]'
         ];
         Provider::update($id, $data);
         header('Location: /providers.php');

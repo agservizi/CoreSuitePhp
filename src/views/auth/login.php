@@ -14,10 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-    <!-- Logo -->
+<div class="login-box">    <!-- Logo -->
     <div class="login-logo">
-        <a href="/index.php"><b>Core</b>Suite</a>
+        <b>CoreSuite</b>
     </div>
     <!-- /.login-logo -->
     <div class="card">

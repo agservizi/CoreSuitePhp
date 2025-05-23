@@ -20,14 +20,12 @@ class CustomerController
     public function create()
     {
         require __DIR__ . '/../views/customers/create.php';
-    }
-
-    public function store()
+    }    public function store()
     {
         $data = [
-            'name' => $_POST['name'] ?? '',
-            'surname' => $_POST['surname'] ?? '',
-            'fiscal_code' => $_POST['fiscal_code'] ?? '',
+            'first_name' => $_POST['first_name'] ?? '',
+            'last_name' => $_POST['last_name'] ?? '',
+            'tax_code' => $_POST['tax_code'] ?? '',
             'phone' => $_POST['phone'] ?? '',
             'email' => $_POST['email'] ?? '',
             'date_of_birth' => $_POST['date_of_birth'] ?? null,
@@ -38,7 +36,7 @@ class CustomerController
             'mobile' => $_POST['mobile'] ?? null,
             'notes' => $_POST['notes'] ?? null
         ];
-        if (!$data['name'] || !$data['surname'] || !$data['fiscal_code']) {
+        if (!$data['first_name'] || !$data['last_name'] || !$data['tax_code']) {
             $error = 'Nome, Cognome e Codice Fiscale sono obbligatori.';
             require __DIR__ . '/../views/customers/create.php';
             return;
@@ -46,9 +44,7 @@ class CustomerController
         Customer::create($data);
         header('Location: /customers.php');
         exit;
-    }
-
-    public function edit($id)
+    }    public function edit($id)
     {
         $customer = Customer::find($id);
         require __DIR__ . '/../views/customers/edit.php';
@@ -57,9 +53,9 @@ class CustomerController
     public function update($id)
     {
         $data = [
-            'name' => $_POST['name'] ?? '',
-            'surname' => $_POST['surname'] ?? '',
-            'fiscal_code' => $_POST['fiscal_code'] ?? '',
+            'first_name' => $_POST['first_name'] ?? '',
+            'last_name' => $_POST['last_name'] ?? '',
+            'tax_code' => $_POST['tax_code'] ?? '',
             'phone' => $_POST['phone'] ?? '',
             'email' => $_POST['email'] ?? '',
             'date_of_birth' => $_POST['date_of_birth'] ?? null,

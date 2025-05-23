@@ -37,11 +37,9 @@
             </li>
         </ul>
     </nav>
-    <!-- /.navbar -->    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- /.navbar -->    <!-- Main Sidebar Container -->    <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="/dashboard.php" class="brand-link">
-            <img src="/assets/images/coresuite-logo.svg" alt="CoreSuite Logo" class="brand-image" style="opacity: .8">
-            <span class="brand-text font-weight-light">CoreSuite</span>
+            <span class="brand-text font-weight-light ml-3">CoreSuite</span>
         </a>
         <div class="sidebar">
             <nav class="mt-2">
@@ -134,14 +132,20 @@
                             <?php if (empty($contracts)): ?>
                                 <tr><td colspan="7" class="text-center text-muted">Nessun contratto disponibile.</td></tr>
                             <?php else: ?>
-                            <?php foreach ($contracts as $c): ?>
-                                <tr>
+                            <?php foreach ($contracts as $c): ?>                                <tr>
                                     <td><?= htmlspecialchars($c['id']) ?></td>
-                                    <td><?= htmlspecialchars($c['customer_id']) ?></td>
-                                    <td><?= htmlspecialchars($c['provider']) ?></td>
+                                    <td><?= htmlspecialchars($c['customer_name'] ?? 'Cliente #'.$c['customer_id']) ?></td>
+                                    <td><?= htmlspecialchars($c['provider_name'] ?? 'Provider #'.$c['provider']) ?></td>
                                     <td><?= htmlspecialchars($c['type']) ?></td>
-                                    <td><?= htmlspecialchars($c['status']) ?></td>
-                                    <td><?= htmlspecialchars($c['created_at']) ?></td>
+                                    <td>
+                                        <span class="badge 
+                                            <?= $c['status'] == 'completato' ? 'badge-success' : 
+                                                ($c['status'] == 'in_corso' ? 'badge-primary' : 
+                                                ($c['status'] == 'annullato' ? 'badge-danger' : 'badge-warning')) ?>">
+                                            <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $c['status']))) ?>
+                                        </span>
+                                    </td>
+                                    <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($c['created_at']))) ?></td>
                                     <td>
                                         <a href="/contracts_show.php?id=<?= $c['id'] ?>" class="btn btn-info btn-sm" title="Dettagli"><i class="fas fa-eye"></i></a>
                                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>

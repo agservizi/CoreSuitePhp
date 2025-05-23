@@ -9,24 +9,41 @@ class ContractController
     {
         $contracts = Contract::allForUser($_SESSION['user_id'], $_SESSION['role']);
         require __DIR__ . '/../views/contracts/index.php';
-    }
-
-    public function show($id)
+    }    public function show($id)
     {
         $contract = Contract::find($id);
-        if ($_SESSION['role'] !== 'admin' && $contract['user_id'] != $_SESSION['user_id']) {
+        if (!$contract || ($_SESSION['role'] !== 'admin' && $contract['user_id'] != $_SESSION['user_id'])) {
             require __DIR__ . '/../views/errors/403.php';
             exit;
         }
+        
+        // Otteniamo i dati delle entità correlate
+        $customer = null;
+        $provider = null;
+        
+        if ($contract['customer_id']) {
+            $customer = \CoreSuite\Models\Customer::find($contract['customer_id']);
+        }
+        
+        if ($contract['provider']) {
+            $provider = \CoreSuite\Models\Provider::find($contract['provider']);
+        }
+        
+        // Otteniamo eventuali allegati
+        $attachments = [];
+        $db = Contract::getDb();
+        $stmt = $db->prepare('SELECT * FROM attachments WHERE contract_id = ?');
+        $stmt->execute([$id]);
+        $attachments = $stmt->fetchAll();
+        
         require __DIR__ . '/../views/contracts/show.php';
-    }
-
-    public function create()
+    }public function create()
     {
+        // Prepariamo i dati per la vista
+        $customers = \CoreSuite\Models\Customer::all();
+        $providers = \CoreSuite\Models\Provider::all();
         require __DIR__ . '/../views/contracts/create.php';
-    }
-
-    public function store()
+    }public function store()
     {
         $data = [
             'customer_id' => $_POST['customer_id'] ?? null,
@@ -34,10 +51,14 @@ class ContractController
             'type' => $_POST['type'] ?? null,
             'status' => $_POST['status'] ?? null,
             'user_id' => $_SESSION['user_id'] ?? null,
+            'created_at' => date('Y-m-d H:i:s'),
             'extra_data' => isset($_POST['extra']) ? json_encode($_POST['extra']) : null
         ];
         if (!$data['customer_id'] || !$data['provider'] || !$data['type'] || !$data['status']) {
             $error = 'Tutti i campi sono obbligatori.';
+            // Prepariamo i dati per la vista
+            $customers = \CoreSuite\Models\Customer::all();
+            $providers = \CoreSuite\Models\Provider::all();
             require __DIR__ . '/../views/contracts/create.php';
             return;
         }

@@ -1,5 +1,20 @@
 /* Tema base CoreSuite + override AdminLTE: palette blu elettrico, verde energia, bianco */
 :root {
+  --primary: #3c8dbc;
+  --secondary: #6c757d;
+  --success: #00a65a;
+  --info: #17a2b8;
+  --warning: #f39c12;
+  --danger: #dd4b39;
+  --light: #f4f6f9;
+  --dark: #343a40;
+  --adminlte-blue: #3c8dbc;
+  --adminlte-green: #00a65a;
+  --adminlte-yellow: #f39c12;
+  --adminlte-red: #dd4b39;
+  --adminlte-gray: #6c757d;
+  --adminlte-light: #f4f6f9;
+  --adminlte-dark: #343a40;
   --coresuite-blue: #0066CC;
   --coresuite-green: #00AA44;
   --coresuite-white: #FFFFFF;

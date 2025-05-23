@@ -2,6 +2,11 @@
 // Wizard installazione CoreSuite completo
 session_start();
 
+// Mostra errori PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Carica config DB
 $config = require __DIR__ . '/../config/database.php';
 

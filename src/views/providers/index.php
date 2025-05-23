@@ -133,6 +133,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php if (empty($providers)): ?>
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">
+                                        <div class="my-4">
+                                            <i class="fas fa-building fa-3x mb-3 text-secondary"></i><br>
+                                            <strong>Nessun provider presente</strong>
+                                            <p class="mt-2">Clicca su <b>Nuovo Provider</b> per inserire il primo gestore/provider.<br>Potrai gestire, modificare ed esportare i tuoi provider da questa pagina.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php else: ?>
                             <?php foreach ($providers as $p): ?>
                                 <tr>
                                     <td><?= htmlspecialchars($p['id']) ?></td>
@@ -148,6 +159,7 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

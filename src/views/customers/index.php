@@ -136,7 +136,15 @@
                             </thead>
                             <tbody>
                             <?php if (empty($customers)): ?>
-                                <tr><td colspan="7" class="text-center text-muted">Nessun cliente disponibile.</td></tr>
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted">
+                                        <div class="my-4">
+                                            <i class="fas fa-user-friends fa-3x mb-3 text-secondary"></i><br>
+                                            <strong>Nessun cliente presente</strong>
+                                            <p class="mt-2">Clicca su <b>Nuovo Cliente</b> per inserire il primo cliente.<br>Potrai gestire, modificare ed esportare i tuoi clienti da questa pagina.</p>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php else: ?>
                             <?php foreach ($customers as $c): ?>                                <tr>
                                     <td><?= htmlspecialchars($c['id']) ?></td>

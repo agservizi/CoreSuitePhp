@@ -130,7 +130,15 @@
                             </thead>
                             <tbody>
                             <?php if (empty($contracts)): ?>
-                                <tr><td colspan="7" class="text-center text-muted">Nessun contratto disponibile.</td></tr>
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">
+                                        <div class="my-4">
+                                            <i class="fas fa-folder-open fa-3x mb-3 text-secondary"></i><br>
+                                            <strong>Nessun contratto disponibile</strong>
+                                            <p class="mt-2">Clicca su <b>Nuovo Contratto</b> per inserire il primo contratto.<br>Potrai gestire, modificare ed esportare i tuoi contratti da questa pagina.</p>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php else: ?>
                             <?php foreach ($contracts as $c): ?>                                <tr>
                                     <td><?= htmlspecialchars($c['id']) ?></td>

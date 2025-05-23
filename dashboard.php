@@ -155,6 +155,16 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info text-center mt-2" id="welcome-empty-data" style="display:none;">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Benvenuto in CoreSuite!<br>
+                            Inizia subito a inserire <b>contratti</b>, <b>clienti</b> e <b>provider</b> per vedere qui le statistiche e i grafici della tua attività.<br>
+                            Tutte le funzionalità sono già pronte: usa il menu a sinistra per cominciare.
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -172,7 +182,10 @@ if (!isset($_SESSION['user_id'])) {
             $('#customers-total').text(data.customers_count || 0);
             $('#revenue-month').text('€' + (data.revenue_month || 0));
             $('#performance-kpi').text((data.performance || 0) + '%');
-            
+            // Mostra messaggio guida se tutto è vuoto
+            if((!data.contracts_count || data.contracts_count==0) && (!data.customers_count || data.customers_count==0)) {
+                $('#welcome-empty-data').show();
+            }
             // Grafici
             if (data.contracts_by_month) {
                 new Chart(document.getElementById('contractsChart'), {
